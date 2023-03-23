@@ -6,5 +6,5 @@
 
 - name: Build Elasticsearch containers
   docker_compose:
-    project_src: ./roles/elasticsearch/files/elastic/
+    project_src: ./roles/compose/files/elastic/
     state: present
