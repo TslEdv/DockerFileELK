@@ -10,9 +10,3 @@
     roles:
       - compose
     tags: compose
-
-  - name: Elasticsearch
-    hosts: elasticsearch
-    roles:
-      - elasticsearch
-    tags: elastic

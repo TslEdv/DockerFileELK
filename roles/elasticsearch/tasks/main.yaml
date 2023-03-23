@@ -1,17 +1,35 @@
-- name: Install sudo package
-  apt:
-    name: sudo
-    state: present
+    - name: Generate elasticsearch.yml files
+      template:
+        src: ./roles/elasticsearch/templates/elasticsearch.yml.j2
+        dest: "./elasticsearch{{ item }}.yml"
+      loop: "{{ range(1, esnumber + 1)|list }}"
 
-- name: Configure Elasticsearch for clustering
-  template:
-    src: ./roles/elasticsearch/files/elasticsearch.yml.j2
-    dest: /etc/elasticsearch/elasticsearch.yml
-    owner: elasticsearch
-    group: elasticsearch
-    mode: '0644'
 
-- name: Start Elasticsearch container
-  become_user: elasticsearch
-  command: /usr/share/elasticsearch/bin/elasticsearch
+    - name: Create network for ELK stack
+      docker_network:
+        name: elk
+    
+    - name: Build image from local Dockerfile
+      docker_image:
+        path: ./roles/compose/files/elastic/
+        name: elasticimage
+        state: present
+
+    - name: Run Elasticsearch containers
+      docker_container:
+        name: "elasticsearch{{ item }}"
+        image: elasticsearch:7.14.1
+        state: started
+        restart_policy: always
+        env:
+          node.name: "es{{ item }}"
+          cluster.name: "es-cluster"
+          ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+          discovery.seed_hosts: "elasticsearch1,elasticsearch2,elasticsearch3"
+          cluster.initial_master_nodes: "es1,es2,es3"
+        networks:
+          - name: elk
+        ports:
+          - "{{ 9200 + item }}:9200"
+      loop: "{{ range(1, esnumber + 1)|list }}"
 
