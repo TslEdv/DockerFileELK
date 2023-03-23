@@ -4,7 +4,7 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
-    curl \
+    curl
 
 # Import Elasticsearch public GPG key
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -

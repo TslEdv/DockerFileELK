@@ -1,27 +1,29 @@
-    - name: Create network for ELK stack
-      docker_network:
-        name: elk
-    
-    - name: Build image from local Dockerfile
-      docker_image:
-        path: ./roles/compose/files/elastic/
-        name: elasticimage
-        state: present
+- name: Create network for ELK stack
+  docker_network:
+     name: elk
 
-    - name: Run Elasticsearch containers
-      docker_container:
-        name: "elasticsearch{{ item }}"
-        image: elasticimage
-        state: started
-        restart_policy: always
-        env:
-          node.name: "es{{ item }}"
-          cluster.name: "es-cluster"
-          ES_JAVA_OPTS: "-Xms1g -Xmx1g"
-          discovery.seed_hosts: "{{ ','.join(['elasticsearch{}'.format(i) for i in range(1, esnumber + 1)]) }}"
-          cluster.initial_master_nodes: "{{ ','.join(['es{}'.format(i) for i in range(1, esnumber + 1)]) }}"
-        networks:
-          - name: elk
-        ports:
-          - "{{ 9200 + item }}:9200"
-      loop: "{{ range(1, esnumber + 1)|list }}"
+- name: Build image from local Dockerfile
+  docker_image:
+     path: ./roles/compose/files/elastic/
+     name: elasticimage
+     state: present
+
+- name: Run Elasticsearch containers
+  docker_container:
+    name: "elasticsearch{{ item }}"
+    image: elasticimage
+    state: started
+    restart_policy: always
+    env:
+      node.name: "es{{ item }}"
+      cluster.name: "es-cluster"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      discovery.seed_hosts: "elasticsearch1,elasticsearch2,elasticsearch3"
+      cluster.initial_master_nodes: "es1,es2,es3"
+    networks:
+      - name: elk
+    ports:
+      - "{{ 9200 + item }}:9200"
+    volumes:
+      - ./roles/elasticsearch/files/elasticsearch{{ item }}.yml:/etc/elasticsearch/elasticsearch.yml
+  loop: "{{ range(1, 4)|list }}"
