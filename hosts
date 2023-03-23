@@ -1,0 +1,11 @@
+[kibana]
+kibana ansible_host=172.16.0.2 ansible_user=root ansible_password=password
+
+[elasticsearch]
+elasticsearch1 ansible_host=172.16.0.3 ansible_user=root ansible_password=password
+elasticsearch2 ansible_host=172.16.0.4 ansible_user=root ansible_password=password
+elasticsearch3 ansible_host=172.16.0.5 ansible_user=root ansible_password=password
+
+[logstash]
+logstash ansible_host=172.16.0.6 ansible_user=root ansible_password=password
+

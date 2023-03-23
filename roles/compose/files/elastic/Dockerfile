@@ -4,7 +4,8 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
-    curl
+    curl \
+    openssh-server
 
 # Import Elasticsearch public GPG key
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
@@ -22,7 +23,7 @@ RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch /etc/default/e
 USER elasticsearch
 
 # Expose ports
-EXPOSE 9200 9300
+EXPOSE 9200 9300 22
 
-# Start Elasticsearch
-CMD ["/usr/share/elasticsearch/bin/elasticsearch"]
+# Start Elasticsearch and SSH
+CMD ["/usr/share/elasticsearch/bin/elasticsearch", "/usr/sbin/sshd", "-D"]

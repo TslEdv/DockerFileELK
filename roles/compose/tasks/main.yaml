@@ -1,0 +1,10 @@
+- name: Install Docker Compose
+  become: true
+  apt:
+    name: docker-compose
+    state: present
+
+- name: Build Elasticsearch containers
+  docker_compose:
+    project_src: ./roles/elasticsearch/files/elastic/
+    state: present
