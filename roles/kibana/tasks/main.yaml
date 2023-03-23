@@ -1,0 +1,18 @@
+- name: Build image from local Dockerfile
+  docker_image:
+     path: ./roles/kibana/image/
+     name: kibanaimage
+     state: present
+
+- name: Run Logstash container
+  docker_container:
+    name: "kibana"
+    image: kibanaimage
+    state: started
+    restart_policy: always
+    networks:
+      - name: elk
+    env:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch1:9200","http://elasticsearch2:9200","http://elasticsearch3:9200"]'
+    volumes:
+      - ./roles/kibana/files/kibana.yml:/etc/kibana/kibana.yml
