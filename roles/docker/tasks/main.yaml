@@ -8,4 +8,8 @@
       apt:
         name: python3-docker
         state: present
-  
+
+    - name: Install sshpass package
+      become: true
+      apt:
+        name: sshpass

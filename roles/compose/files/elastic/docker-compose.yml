@@ -10,7 +10,7 @@ services:
     ports:
       - "9201:9200"
     environment:
-      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
 
   elasticsearch2:
     build: .
@@ -21,7 +21,7 @@ services:
     ports:
       - "9202:9200"
     environment:
-      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      - "JAVA_OPTS=-Xms1g -Xmx1g"
 
   elasticsearch3:
     build: .
@@ -32,7 +32,7 @@ services:
     ports:
       - "9203:9200"
     environment:
-      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      - "JAVA_OPTS=-Xms1g -Xmx1g"
 
 networks:
   elk:

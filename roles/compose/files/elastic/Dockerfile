@@ -30,4 +30,5 @@ RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch /etc/default/e
 # Expose ports
 EXPOSE 9200 9300 22
 
-CMD /usr/sbin/ssh -D
+CMD ["/usr/sbin/sshd", "-D"]
+

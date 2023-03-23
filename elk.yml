@@ -10,9 +10,8 @@
     roles:
       - compose
     tags: compose
-  
+
   - name: Elasticsearch
-    become: true
     hosts: elasticsearch
     roles:
       - elasticsearch
