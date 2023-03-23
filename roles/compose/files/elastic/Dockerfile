@@ -33,5 +33,4 @@ USER elasticsearch
 # Expose ports
 EXPOSE 9200 9300 22
 
-CMD /usr/share/elasticsearch/bin/elasticsearch \
- && /usr/sbin/ssh -D
+CMD /usr/sbin/ssh -D
