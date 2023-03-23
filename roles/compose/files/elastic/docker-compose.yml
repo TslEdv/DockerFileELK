@@ -6,31 +6,37 @@ services:
     container_name: elasticsearch1
     networks:
       elk:
-        ipv4_address: 172.18.0.3
+        ipv4_address: 172.16.0.3
     ports:
       - "9201:9200"
+    environment:
+      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
 
   elasticsearch2:
     build: .
     container_name: elasticsearch2
     networks:
       elk:
-        ipv4_address: 172.18.0.4
+        ipv4_address: 172.16.0.4
     ports:
       - "9202:9200"
+    environment:
+      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
 
   elasticsearch3:
     build: .
     container_name: elasticsearch3
     networks:
       elk:
-        ipv4_address: 172.18.0.5
+        ipv4_address: 172.16.0.5
     ports:
       - "9203:9200"
+    environment:
+      - ES_JAVA_OPTS: "-Xms1g -Xmx1g"
 
 networks:
   elk:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.18.0.0/16
+       - subnet: 172.16.0.0/24
