@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
     curl \
-    openssh-server
+    openssh-server 
 
 RUN mkdir /var/run/sshd && \
     echo 'root:password' | chpasswd && \
@@ -26,9 +26,6 @@ RUN apt-get update && apt-get install -y elasticsearch
 
 # Change ownership of Elasticsearch directories
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch /etc/default/elasticsearch /var/lib/elasticsearch /var/log/elasticsearch
-
-# Switch to elasticsearch user
-USER elasticsearch
 
 # Expose ports
 EXPOSE 9200 9300 22
