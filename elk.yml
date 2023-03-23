@@ -10,3 +10,9 @@
     roles:
       - elasticsearch
     tags: elastic
+
+  - name: Create Logstash node
+    hosts: localhost
+    roles:
+      - logstash
+    tags: logstash
