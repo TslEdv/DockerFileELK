@@ -1,0 +1,17 @@
+- name: Build image from local Dockerfile
+  docker_image:
+     path: ./roles/logstash/image/
+     name: logimage
+     state: present
+
+
+- name: Run Logstash container
+  docker_container:
+    name: "logstash"
+    image: logimage
+    state: started
+    restart_policy: always
+    networks:
+      - name: elk
+    volumes:
+      - ./roles/logstash/files/logstash.conf:/etc/logstash/conf.d/logstash.conf

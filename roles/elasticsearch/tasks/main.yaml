@@ -11,7 +11,7 @@
 
 - name: Build image from local Dockerfile
   docker_image:
-     path: ./roles/compose/files/elastic/
+     path: ./roles/elasticsearch/image/
      name: elasticimage
      state: present
 
