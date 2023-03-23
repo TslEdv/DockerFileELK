@@ -5,8 +5,8 @@
       - docker
     tags: docker
 
-  - name: Create VMs
+  - name: Create Elastic nodes
     hosts: localhost
     roles:
-      - compose
-    tags: compose
+      - elasticsearch
+    tags: elastic

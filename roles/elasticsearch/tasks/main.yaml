@@ -1,10 +1,3 @@
-    - name: Generate elasticsearch.yml files
-      template:
-        src: ./roles/elasticsearch/templates/elasticsearch.yml.j2
-        dest: "./elasticsearch{{ item }}.yml"
-      loop: "{{ range(1, esnumber + 1)|list }}"
-
-
     - name: Create network for ELK stack
       docker_network:
         name: elk
@@ -18,18 +11,17 @@
     - name: Run Elasticsearch containers
       docker_container:
         name: "elasticsearch{{ item }}"
-        image: elasticsearch:7.14.1
+        image: elasticimage
         state: started
         restart_policy: always
         env:
           node.name: "es{{ item }}"
           cluster.name: "es-cluster"
           ES_JAVA_OPTS: "-Xms1g -Xmx1g"
-          discovery.seed_hosts: "elasticsearch1,elasticsearch2,elasticsearch3"
-          cluster.initial_master_nodes: "es1,es2,es3"
+          discovery.seed_hosts: "{{ ','.join(['elasticsearch{}'.format(i) for i in range(1, esnumber + 1)]) }}"
+          cluster.initial_master_nodes: "{{ ','.join(['es{}'.format(i) for i in range(1, esnumber + 1)]) }}"
         networks:
           - name: elk
         ports:
           - "{{ 9200 + item }}:9200"
       loop: "{{ range(1, esnumber + 1)|list }}"
-
