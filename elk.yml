@@ -16,3 +16,9 @@
     roles:
       - logstash
     tags: logstash
+
+  - name: Create Kibana node
+    hosts: localhost
+    roles:
+      - kibana
+    tags: kibana
