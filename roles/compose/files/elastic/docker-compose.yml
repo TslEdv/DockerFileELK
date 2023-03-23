@@ -5,7 +5,7 @@ services:
     container_name: elasticsearch1
     networks:
       elk:
-        ipv4_address: 172.16.0.3
+        ipv4_address: 172.20.0.3
     ports:
     - "9201:9200"
 
@@ -14,7 +14,7 @@ services:
     container_name: elasticsearch2
     networks:
       elk:
-        ipv4_address: 172.16.0.4
+        ipv4_address: 172.20.0.4
     ports:
     - "9202:9200"
 
@@ -23,7 +23,7 @@ services:
     container_name: elasticsearch3
     networks:
       elk:
-        ipv4_address: 172.16.0.5
+        ipv4_address: 172.20.0.5
     ports:
     - "9203:9200"
 
@@ -31,4 +31,4 @@ networks:
   elk:
     ipam:
       config:
-        - subnet: 172.16.0.0/24
+        - subnet: 172.20.0.0/24
