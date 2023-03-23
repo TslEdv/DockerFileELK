@@ -7,6 +7,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     openssh-server
 
+RUN mkdir /var/run/sshd && \
+    echo 'root:password' | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    # SSH login fix. Otherwise user is kicked off after login
+    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
+    # Environment variables
+    echo "export VISIBLE=now" >> /etc/profile
+
 # Import Elasticsearch public GPG key
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 
@@ -25,5 +33,5 @@ USER elasticsearch
 # Expose ports
 EXPOSE 9200 9300 22
 
-# Start Elasticsearch and SSH
-CMD ["/usr/share/elasticsearch/bin/elasticsearch", "/usr/sbin/sshd", "-D"]
+CMD /usr/share/elasticsearch/bin/elasticsearch \
+ && /usr/sbin/ssh -D
