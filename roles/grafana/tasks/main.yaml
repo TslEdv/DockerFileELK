@@ -4,7 +4,7 @@
      name: grafanaimage
      state: present
 
-- name: Run Prometheus container
+- name: Run Grafana container
   docker_container:
     name: "grafana"
     image: grafanaimage
@@ -13,6 +13,8 @@
     networks:
       - name: elk
     volumes:
-      - ./roles/prometheus/files/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./roles/grafana/files/main.json:/etc/grafana/provisioning/dashboards/main.json
+      - ./roles/grafana/templates/datasource.yaml:/usr/share/grafana/conf/provisioning/datasources/datasource.yml
+      - ./roles/grafana/templates/dashboard.yaml:/usr/share/grafana/conf/provisioning/dashboards/dashboard.yaml
     ports:
       - "3000:3000"
