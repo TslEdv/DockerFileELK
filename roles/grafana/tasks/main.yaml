@@ -1,0 +1,18 @@
+- name: Build image from local Dockerfile
+  docker_image:
+     path: ./roles/grafana/image/
+     name: grafanaimage
+     state: present
+
+- name: Run Prometheus container
+  docker_container:
+    name: "grafana"
+    image: grafanaimage
+    state: started
+    restart_policy: always
+    networks:
+      - name: elk
+    volumes:
+      - ./roles/prometheus/files/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "3000:3000"

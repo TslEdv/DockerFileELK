@@ -34,3 +34,9 @@
     roles:
       - prometheus
     tags: prometheus
+
+  - name: Create Grafana node
+    hosts: localhost
+    roles:
+      - grafana
+    tags: grafana

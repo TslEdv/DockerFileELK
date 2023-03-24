@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     curl \
     net-tools \
-    iputils-ping
+    iputils-ping \
+    software-properties-common
 
 # Import Grafana public GPG key
 RUN wget -qO - https://packages.grafana.com/gpg.key | apt-key add -
@@ -21,4 +22,4 @@ RUN apt-get update && apt-get install -y grafana
 EXPOSE 3000
 
 # Start Grafana
-CMD ["/usr/sbin/grafana-server", "--config=/etc/grafana/grafana.ini", "cfg:default.paths.data=/var/lib/grafana", "cfg:default.paths.logs=/var/log/grafana", "cfg:default.paths.plugins=/var/lib/grafana/plugins"]
+CMD ["/usr/sbin/grafana-server", "--homepath=/usr/share/grafana", "--config=/etc/grafana/grafana.ini"]
