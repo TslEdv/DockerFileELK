@@ -1,3 +1,6 @@
 server.port: 5601
 server.host: "0.0.0.0"
-elasticsearch.hosts: ${ELASTICSEARCH_HOSTS}
+elasticsearch.hosts: 
+ - http://elasticsearch1:9200
+ - http://elasticsearch2:9200
+ - http://elasticsearch3:9200

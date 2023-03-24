@@ -14,4 +14,5 @@
     networks:
       - name: elk
     volumes:
-      - ./roles/logstash/files/logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - ./roles/logstash/files/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./roles/logstash/files/pipelines.yml:/usr/share/logstash/config/pipelines.yml
