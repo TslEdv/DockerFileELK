@@ -11,6 +11,8 @@
     state: started
     ports:
       - "8080:8080"
+    networks:
+      - name: elk
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw

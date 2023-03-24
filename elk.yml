@@ -28,3 +28,9 @@
     roles:
       - kibana
     tags: kibana
+
+  - name: Create Prometheus node
+    hosts: localhost
+    roles:
+      - prometheus
+    tags: prometheus
