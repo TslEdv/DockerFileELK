@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: 'elasticsearch1'
+    scrape_interval: 15s
+    metrics_path: '/_prometheus/metrics'
+    static_configs:
+      - targets: ['elasticsearch1:9200']

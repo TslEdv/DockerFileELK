@@ -22,6 +22,10 @@ RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch /etc/default/e
 
 USER elasticsearch
 
+# Install Elasticsearch Prometheus Exporter
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch https://github.com/vvanholl/elasticsearch-prometheus-exporter/releases/download/8.0.0.0/prometheus-exporter-8.0.0.0.zip
+
+
 # Expose ports
 EXPOSE 9200 9300
 
