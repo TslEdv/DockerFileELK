@@ -5,6 +5,12 @@
       - docker
     tags: docker
 
+  - name: Create cAdvisor node
+    hosts: localhost
+    roles:
+      - cadvisor
+    tags: cadvisor
+
   - name: Create Elastic nodes
     hosts: localhost
     roles:

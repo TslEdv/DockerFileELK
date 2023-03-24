@@ -8,3 +8,7 @@
       apt:
         name: python3-docker
         state: present
+
+    - name: Create network for ELK stack
+      docker_network:
+         name: elk

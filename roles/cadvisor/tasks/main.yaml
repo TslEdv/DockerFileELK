@@ -1,0 +1,18 @@
+- name: Build image from local Dockerfile
+  docker_image:
+     path: ./roles/cadvisor/image/
+     name: cadimage
+     state: present
+
+- name: Deploy cAdvisor Docker container
+  docker_container:
+    name: cadvisor
+    image: cadimage
+    state: started
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
