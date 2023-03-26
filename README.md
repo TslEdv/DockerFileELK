@@ -20,7 +20,8 @@ The services can be accessed on the following localhost ports:
 - Prometheus (localhost:9090)
 - cAdvisor (localhost:8080)
 
-Grafana is configured with the default username and password (admin admin).
+Grafana is configured with the default username and password (admin admin). <br>
+Grafana has a dashboard called ELK monitoring in the "General" folder.
 
 The possible backup approaches can be found in the backup-approach.txt file.
 
