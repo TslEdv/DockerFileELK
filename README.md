@@ -22,7 +22,8 @@ The services can be accessed on the following localhost ports:
 
 Logstash can be sent custom log via `netcat`. For example, using this command on the localhost: <br>
 `echo "Hello world!" | nc <logstash-container-ip> 5042` <br>
-IP can be found using: `sudo docker network inspect elk`
+IP can be found using: `sudo docker network inspect elk` <br>
+Logs can be seen in Kibana under Observability -> Logs.
 
 Grafana is configured with the default username and password (admin admin). <br>
 Grafana has a dashboard called ELK monitoring in the "General" folder.
