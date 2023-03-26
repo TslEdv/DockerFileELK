@@ -1,0 +1,22 @@
+Since all of the services run in Docker containers, one backup approach could be to create a cron job to reguraly backup the containers.
+
+But for more specific service backup strategies here are some possibilities:
+
+Elasticsearch - Data can be backed up using its built-in snapshot and restore functionality. 
+We can create snapshots of Elasticsearch data and store them on a separate disk or in a cloud-based storage service.
+
+Logstash - Configurations can be backed up by copying the configuration files to a separate location (in our case - Github). 
+Additionally, it's recommended to periodically export and save any important logs data that Logstash generates to a separate location.
+
+Kibana - Can be backed up by exporting saved objects like visualizations, dashboards and searches.
+
+Prometheus -  We store Prometheus configuration in Github. Also can be backed up by backing up its data directory.
+This directory contains all the data that Prometheus has collected, including metrics, alerts, and rules.
+
+Grafana - can be backed up by exporting the dashboards and panels. Currently we have the main.json panel, Grafana Configurations
+and the datasources in the Github.
+
+cAdvisor - all of the metrics are collected by Prometheus, backing up Prometheus would be sufficient.
+
+In any case, the backup files should be stored in a secure location that is separate from the primary environment, whether thats another
+disk or the cloud.
