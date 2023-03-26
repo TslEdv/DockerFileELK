@@ -20,6 +20,10 @@ The services can be accessed on the following localhost ports:
 - Prometheus (localhost:9090)
 - cAdvisor (localhost:8080)
 
+Logstash can be sent custom log via `netcat`. For example, using this command on the localhost: <br>
+`echo "Hello world!" | nc <logstash-container-ip> 5042` <br>
+IP can be found using: `sudo docker network inspect elk`
+
 Grafana is configured with the default username and password (admin admin). <br>
 Grafana has a dashboard called ELK monitoring in the "General" folder.
 
